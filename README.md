@@ -24,4 +24,16 @@
 		  HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_SET);
 	  }
   HAL_Delay(50);
- 
+
+ ## 1. FreeRTOS, Tâches et semaphores
+
+ ### 1.1 tache simple
+
+ 1) TOTAL_HEAP_SIZE défini l'espace que l'on accorde au Kernel de FreeRTOS sur la RAM. Lorsque on change ce paramètre, un define vois sa valeur changer dans FreeRTOSConfig.h.
+
+ 2) TICK_PERIOD_MS permet de définir le temps d'attente entre chaque exécution de la fonction.
+
+### 1.3 Notification
+
+
+
