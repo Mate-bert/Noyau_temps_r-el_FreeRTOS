@@ -15,15 +15,15 @@
    HAL_Delay(500);
 
 6) Pour ajouter la fonctionnalité d'allumage de la LED avec l'appuie du boutton, on modifie le code dans le while(1) par ça :
-'''  if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11) == GPIO_PIN_SET)
-'''		{
-'''		  HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_RESET);
-'''		}
-''' else
-'''	  {
-'''		  HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_SET);
-'''	  }
-'''  HAL_Delay(50);
+  if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11) == GPIO_PIN_SET)
+		{
+		  HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_RESET);
+		}
+ else
+	  {
+		  HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_SET);
+	  }
+  HAL_Delay(50);
 
  ## 1. FreeRTOS, Tâches et semaphores
 
@@ -45,27 +45,27 @@ Exemple utilisation notification : xTaskNotifyGive(taskHandle); // Notifie une t
     
 11) Utiliser un mutex pour garantir que seul une tâche à la fois accéde au printf :`
 
-'''    /*-----Création du mutex : ---------*/
+    /*-----Création du mutex : ---------*/
 
-'''    xMutex = xSemaphoreCreateMutex();
-'''	if (xMutex == NULL) {
-''' 		printf("Erreur : Mutex non créé\r\n");
-'''    		while (1);
-'''	}
+    xMutex = xSemaphoreCreateMutex();
+	if (xMutex == NULL) {
+ 		printf("Erreur : Mutex non créé\r\n");
+    		while (1);
+	}
  
-'''/* --------- Utilisation du mutex : --------*/
-'''void task_bug(void * pvParameters)
-'''{
-'''    int delay = (int) pvParameters;
-'''    for(;;)
-'''    {
-'''        if (xSemaphoreTake(xMutex, portMAX_DELAY) == pdTRUE) {  // Prend le mutex
-'''            printf("Je suis %s et je m'endors pour %d ticks\r\n", pcTaskGetName(NULL), delay);
-'''            xSemaphoreGive(xMutex);
-'''        }
-'''        vTaskDelay(delay);
-'''    }
-'''}
+/* --------- Utilisation du mutex : --------*/
+void task_bug(void * pvParameters)
+{
+    int delay = (int) pvParameters;
+    for(;;)
+    {
+        if (xSemaphoreTake(xMutex, portMAX_DELAY) == pdTRUE) {  // Prend le mutex
+            printf("Je suis %s et je m'endors pour %d ticks\r\n", pcTaskGetName(NULL), delay);
+            xSemaphoreGive(xMutex);
+        }
+        vTaskDelay(delay);
+    }
+}
 
 ## 2 On joue avec le Shell
 
